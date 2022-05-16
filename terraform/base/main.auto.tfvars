@@ -1,0 +1,2 @@
+project = "dataops"
+env     = "dev"

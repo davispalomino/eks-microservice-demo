@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "c8a2af82-509a-4592-ac9e-3e1f3cb1db68",
+		"name": "TEST Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TOKEN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"token\", response.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://container:80/generator",
+					"protocol": "http",
+					"host": [
+						"container"
+					],
+					"path": [
+						"generator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Parse-REST-API-Key",
+						"value": "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c",
+						"type": "default"
+					},
+					{
+						"key": "X-JWT-KWY",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"message\" : \"This is a test\",\n\"to\": \"Juan Perez\",\n\"from\": \"Rita Asturia\",\n\"timeToLifeSec\" : 45\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://container:80/DevOps",
+					"protocol": "http",
+					"host": [
+						"container"
+					],
+					"path": [
+						"DevOps"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Parse-REST-API-Key",
+								"value": "2f5ae96c-b558-4c7b-a590-a501ae1c3f6c",
+								"type": "default"
+							},
+							{
+								"key": "X-JWT-KWY",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"message\" : \"This is a test\",\n\"to\": \"Juan Perez\",\n\"from\": \"Rita Asturia\",\n\"timeToLifeSec\" : 45\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://container:80/DevOps",
+							"protocol": "http",
+							"path": [
+								"DevOps"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 11:29:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Hello Juan Perez your message will be send\"\n}"
+				}
+			]
+		},
+		{
+			"name": "GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://container:80/health",
+					"protocol": "http",
+					"host": [
+						"container"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://container:80/health",
+							"protocol": "http",
+							"host": [
+								"container"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "24"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 16 May 2022 11:31:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "gunicorn"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"health UP\"\n}"
+				}
+			]
+		}
+	]
+}

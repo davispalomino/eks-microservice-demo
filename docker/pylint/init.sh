@@ -1,0 +1,1 @@
+find -L /app -name [eE]xtensions -o -name "*.py" -print | xargs pylint ${PARAMS} --rcfile /etc/pylint.cfg --exit-zero

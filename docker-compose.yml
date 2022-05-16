@@ -1,0 +1,28 @@
+version: "2.1"
+services:
+  container:
+    image: ${PROJECT}-${ENV}-${SERVICE}
+    ports:
+      - "${TF_VAR_PORT}"
+    restart: unless-stopped
+    healthcheck:
+      test: curl --fail http://localhost:${TF_VAR_PORT}${TF_VAR_PATH_HEALTH} || exit 1
+      interval: 20s
+      timeout: 2s
+      retries: 3
+    networks:
+      - app-network
+  newman:
+    depends_on:
+      container:
+        condition: service_healthy
+    image: ${PROJECT}-container-postman:latest
+    hostname: newman
+    networks:
+      - app-network
+    volumes:
+      - "./test:/testing"
+    command: run "/testing/postman_collection3.json" 
+networks:
+  app-network:
+    driver: bridge

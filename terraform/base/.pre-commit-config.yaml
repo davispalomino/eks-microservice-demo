@@ -1,0 +1,13 @@
+repos:
+- repo: git://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.43.0
+  hooks:
+    - id: terraform_fmt
+      exclude: ^.terraform/
+    - id: terraform_docs
+      exclude: ^.terraform/
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  rev: v3.2.0
+  hooks:
+    - id: check-merge-conflict
+      exclude: ^.terraform/⏎
