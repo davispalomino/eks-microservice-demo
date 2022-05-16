@@ -26,6 +26,8 @@ Quick-Install Wizard is provided that will guide you through the first installat
 ```Makefile
 make quickstart
 ```
+When you're done, replace /etc/hosts with the balancer's IP addresses to domain.
+
 
 ## Update Image and APP code
 
@@ -33,6 +35,29 @@ Update the application code
 
 ```Makefile
 make container_update
+```
+
+## Generate JWT
+
+{{DOMAIN}}=devops.nttdata.com
+```shell
+curl --location --request POST 'http://{{DOMAIN}}/generator'
+```
+
+## Validate
+
+{{DOMAIN}}=devops.nttdata.com
+```shell
+curl --location --request POST 'http://{{DOMAIN}}/DevOps' \
+--header 'X-Parse-REST-API-Key: 2f5ae96c-b558-4c7b-a590-a501ae1c3f6c' \
+--header 'X-JWT-KWY: {{JWT}}' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"message" : "This is a test",
+"to": "Juan Perez",
+"from": "Rita Asturia",
+"timeToLifeSec" : 45
+}'
 ```
 
 ## Troubleshooting
